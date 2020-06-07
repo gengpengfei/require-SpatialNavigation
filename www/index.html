@@ -1,65 +1,164 @@
 ﻿<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>JavaScript SpatialNavigation Demo Page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="js/app/style/index.css">
-    <script data-main="js/app" src="js/lib/require.js"></script>
-  </head>
-  <body>
-    <div id="main-container" class="container">
-      <div id="upperbox">
-        <div id="button-settings" class="button focusable"><span class="fa fa-cog"></span></div>
-        <div id="button-function-area">
-          <div id="button-function" class="button focusable"><span class="fa fa-wrench"></span></div>
-          <div id="button-function-1" class="button focusable sub-button hide"><span class="fa fa-thumb-tack"></span></div>
-          <div id="button-function-2" data-sn-right="" class="button focusable sub-button hide"><span class="fa fa-star"></span></div>
-        </div>
-      </div>
-      <div id="middlebox">
-        <div class="icon focusable" id="firefox"><i class="fa fa-firefox"></i></div>
-        <div class="icon focusable" id="chrome"><i class="fa fa-chrome"></i></div>
-        <div class="icon focusable" id="safari"><i class="fa fa-safari"></i></div>
-        <div class="icon focusable" id="opera"><i class="fa fa-opera"></i></div>
-        <div class="icon focusable" id="internet-explorer"><i class="fa fa-internet-explorer"></i></div>
-        <div class="icon focusable" id="apple"><i class="fa fa-apple"></i></div>
-        <div class="icon focusable" id="linux"><i class="fa fa-linux"></i></div>
-        <div class="icon focusable" id="windows"><i class="fa fa-windows"></i></div>
-        <div class="icon focusable" id="youtube"><i class="fa fa-youtube"></i></div>
-        <div class="icon focusable" id="vimeo"><i class="fa fa-vimeo"></i></div>
-        <div class="icon focusable" id="google-plus"><i class="fa fa-google-plus-square"></i></div>
-        <div class="icon focusable" id="facebook"><i class="fa fa-facebook-official"></i></div>
-        <div class="icon focusable" id="twitter"><i class="fa fa-twitter"></i></div>
-        <div class="icon focusable" id="skype"><i class="fa fa-skype"></i></div>
-        <div class="icon focusable" id="dropbox"><i class="fa fa-dropbox"></i></div>
-        <div class="icon focusable" id="android"><i class="fa fa-android"></i></div>
-        <div class="icon focusable" id="html5"><i class="fa fa-html5"></i></div>
-        <div class="icon focusable" id="css3"><i class="fa fa-css3"></i></div>
-        <div class="icon focusable" id="github"><i class="fa fa-github"></i></div>
-        <div class="icon focusable" id="bitbucket"><i class="fa fa-bitbucket"></i></div>
-        <div class="icon focusable" id="jsfiddle"><i class="fa fa-jsfiddle"></i></div>
-      </div>
-      <div id="lowerbox">
-        <p><i class="fa fa-asterisk"></i> Only "settings" icon has its function.</p>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>launchar</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="js/app/style/index.css">
+  <script data-main="js/app" src="js/lib/require.js"></script>
+</head>
+
+<body>
+  <div id="main-container" class="container">
+    <div id="header" class="header row-between">
+      <div class="logo"><i class="fa fa-bed"></i></div>
+      <div class="setting-icon row-end">
+        <div class="button focusable" id="files" data-sn-left="#weather"><i class="fa fa-file"></i></div>
+        <div class="button focusable"><i class="fa fa-search"></i></div>
+        <div class="button focusable"><i class="fa fa-cog"></i></div>
+        <div class="button focusable"><i>12</i></div>
+        <div class="button focusable" id="weather" data-sn-right="#files"><i class="fa fa-forumbee"></i></div>
       </div>
     </div>
-    <div id="settings-container" class="container hide">
-      <div id="settings-dialog">
-        <h1>Settings</h1>
-        <div id="option-area">
-          <div id="settings-1" class="focusable"><i class="fa fa-check"></i> Lorem ipsum dolor sit amet</div>
-          <div id="settings-2" class="focusable"><i class="fa"></i> Consectetur adipiscing elit</div>
-          <div id="settings-3" class="focusable"><i class="fa fa-check"></i> Aliquam mauris ipsum, semper </div>
-          <div id="settings-4" class="focusable"><i class="fa fa-check"></i> Mauris libero turpis</div>
-          <div id="settings-5" class="focusable"><i class="fa"></i> Sed nunc purus, facilisis et risus</div>
+    <div class="contents row-between">
+      <div id="menu" class="column-center">
+        <div id="home" class="button focusable" data-sn-up="#files"><span class="fa fa-home"></span></div>
+        <div id="video" class="button focusable"><span class="fa fa-youtube-play"></span></div>
+        <div id="music" class="button focusable"><span class="fa fa-music"></span></div>
+        <div id="game" class="button focusable" data-sn-down=""><span class="fa fa-tencent-weibo"></span></div>
+      </div>
+      <div id="homepage" class="content">
+        <div class="home-first" id="home-first">
+          <div class="live-tv button focusable row-center">live TV</div>
+          <div class="button focusable row-center">Video</div>
+          <div class="button focusable row-center">Game</div>
+          <div class="app-store" id="app-store">
+            <div class="button focusable"></div>
+            <div class="button focusable"></div>
+            <div class="button focusable"></div>
+          </div>
+          <div class="app-recommend" id="app-recommend">
+            <div class="button focusable"></div>
+            <div class="button focusable"></div>
+            <div class="button focusable"></div>
+            <div class="button focusable"></div>
+          </div>
         </div>
-        <footer>
-          <div id="button-save" class="button focusable">Save</div>
-          <div id="button-cancel" class="button focusable">Cancel</div>
-        </footer>
+
+        <div class="content-model" id="video-model">
+          <div class="content-title-gap">
+            <div class="content-title">This is video title</div>
+          </div>
+          <div class="content-recommend" id="zcx">
+            <div class="button focusable"></div>
+            <div class="button focusable"></div>
+          </div>
+          <div class="content-list">
+            <div class="content-list-scroll">
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+            </div>
+          </div>
+        </div>
+        <div class="content-model" id="music-model">
+          <div class="content-title-gap">
+            <div class="content-title">This is music title</div>
+          </div>
+          <div class="content-recommend">
+            <div class="button focusable"></div>
+            <div class="button focusable"></div>
+          </div>
+          <div class="content-list">
+            <div class="content-list-scroll">
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+            </div>
+          </div>
+        </div>
+        <div class="home-ads ads">
+          <div class="button focusable row-center home-ads-info">ads</div>
+        </div>
+        <div class="content-model" id="sports-model">
+          <div class="content-title-gap">
+            <div class="content-title">This is sports title</div>
+          </div>
+          <div class="content-recommend">
+            <div class="button focusable"></div>
+            <div class="button focusable"></div>
+          </div>
+          <div class="content-list">
+            <div class="content-list-scroll">
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+              <div class="button focusable content-item"></div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div id="middlebox">
+          <div class="icon focusable" id="firefox"><i class="fa fa-firefox"></i></div>
+          <div class="icon focusable" id="chrome"><i class="fa fa-chrome"></i></div>
+          <div class="icon focusable" id="safari"><i class="fa fa-safari"></i></div>
+          <div class="icon focusable" id="opera"><i class="fa fa-opera"></i></div>
+          <div class="icon focusable" id="internet-explorer"><i class="fa fa-internet-explorer"></i></div>
+          <div class="icon focusable" id="apple"><i class="fa fa-apple"></i></div>
+          <div class="icon focusable" id="linux"><i class="fa fa-linux"></i></div>
+          <div class="icon focusable" id="windows"><i class="fa fa-windows"></i></div>
+          <div class="icon focusable" id="youtube"><i class="fa fa-youtube"></i></div>
+          <div class="icon focusable" id="vimeo"><i class="fa fa-vimeo"></i></div>
+          <div class="icon focusable" id="google-plus"><i class="fa fa-google-plus-square"></i></div>
+          <div class="icon focusable" id="facebook"><i class="fa fa-facebook-official"></i></div>
+          <div class="icon focusable" id="twitter"><i class="fa fa-twitter"></i></div>
+          <div class="icon focusable" id="skype"><i class="fa fa-skype"></i></div>
+          <div class="icon focusable" id="dropbox"><i class="fa fa-dropbox"></i></div>
+          <div class="icon focusable" id="android"><i class="fa fa-android"></i></div>
+          <div class="icon focusable" id="html5"><i class="fa fa-html5"></i></div>
+          <div class="icon focusable" id="css3"><i class="fa fa-css3"></i></div>
+          <div class="icon focusable" id="github"><i class="fa fa-github"></i></div>
+          <div class="icon focusable" id="bitbucket"><i class="fa fa-bitbucket"></i></div>
+          <div class="icon focusable" id="jsfiddle"><i class="fa fa-jsfiddle"></i></div>
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+  <div id="settings-container" class="container hide">
+    <div id="settings-dialog">
+      <h1>Settings</h1>
+      <div id="option-area">
+        <div id="settings-1" class="focusable"><i class="fa fa-check"></i> Lorem ipsum dolor sit amet</div>
+        <div id="settings-2" class="focusable"><i class="fa"></i> Consectetur adipiscing elit</div>
+        <div id="settings-3" class="focusable"><i class="fa fa-check"></i> Aliquam mauris ipsum, semper </div>
+        <div id="settings-4" class="focusable"><i class="fa fa-check"></i> Mauris libero turpis</div>
+        <div id="settings-5" class="focusable"><i class="fa"></i> Sed nunc purus, facilisis et risus</div>
+      </div>
+      <footer>
+        <div id="button-save" class="button focusable">Save</div>
+        <div id="button-cancel" class="button focusable">Cancel</div>
+      </footer>
+    </div>
+  </div>
+</body>
+
 </html>
