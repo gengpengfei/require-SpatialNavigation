@@ -1,126 +1,163 @@
-require(['jquery','i18n!nls/language','navigation'],function($,language,SpatialNavigation) {
-      $(function() {
-        // A short name of the SpatialNavigation singleton object.
-        var SN = SpatialNavigation;
-        // Initialize
-        SN.init();
+require(['jquery','navigation','../plugin/sdkApi'],function($,SpatialNavigation,sdkApi) {
+  // 数据填充
+  function fillSystemApp(){
+    var sysApp = sdkApi.getSystemApp();
+    var childrens = $("#app-store").children();
+    if(childrens.length > 0){
+      childrens.each(function(i,e){
+        // <img src="file:/'+sysApp[i].icon+'"/>
+        $(e).html('<div class="app-recommend-i row-center"><div class="app-name">'+sysApp[i].name+'</div></div>');
+        $(e).attr({'clickType':'1',"clickUrl":sysApp[i].packageName})
+      })
+    }
+  }
+  function fillNormalApp(){
+    var normalApp = sdkApi.getNormalApp();
+    var childrens = $("#app-recommend").children();
+    if(childrens.length > 0){
+      childrens.each(function(i,e){
+        // <img src="file:/'+normalApp[i].icon+'"/>
+        $(e).html('<div class="app-recommend-i  row-center"><div class="app-name">'+normalApp[i].name+'</div></div>');
+        $(e).attr({'clickType':'1',"clickUrl":normalApp[i].packageName})
+      })
+    }
+  }
 
-        // Add the first section "upperbox".
-        SN.add({
-          id: 'upperbox',
-          selector: '#upperbox .focusable',
+  fillSystemApp();
+  fillNormalApp();
 
-          // Force to focus the "#button-settings" when entering this section.
-          defaultElement: '#button-settings',
-          enterTo: 'default-element'
+  $(function() {
+    var SN = SpatialNavigation;
+    SN.init();
+    
+    // 导航
+    SN.add({
+      id: 'menu',
+      selector: '#menu .focusable',
+      defaultElement: '#home',
+      enterTo: 'last-focused'
+    });
+    // 头部
+    SN.add({
+      id: 'header',
+      selector: '#header .focusable',
+      enterTo: 'last-focused',
+    });
+    //-- homepage
+    SN.add({
+      id: 'homepage',
+      selector: '#homepage .focusable',
+      straightOnly:'true',
+      enterTo: 'last-focused',
+      leaveFor:{
+        left:'#home'
+      }
+    });
+    //-- video page 
+    SN.add({
+      id: 'videopage',
+      selector: '#videopage .focusable',
+      straightOnly:'true',
+      enterTo: 'last-focused',
+      leaveFor:{
+        left:'#video'
+      }
+    });
+    //-- music page 
+    SN.add({
+      id: 'musicpage',
+      selector: '#musicpage .focusable',
+      straightOnly:'true',
+      enterTo: 'last-focused',
+      leaveFor:{
+        left:'#music'
+      }
+    });
+    //-- game page 
+    SN.add({
+      id: 'gamepage',
+      selector: '#gamepage .focusable',
+      straightOnly:'true',
+      enterTo: 'last-focused',
+      leaveFor:{
+        left:'#game'
+      }
+    });
+    // 动画
+    $('#homepage .focusable')
+    .on('sn:willfocus', function(e) { 
+      var SNInfo = e.originalEvent.detail;
+      if(SNInfo.direction == 'up' || SNInfo.direction == 'down'){
+        SN.pause();
+        var elem = $('#homepage')
+        $(this).ensureVertical(elem,function() {
+          SN.focus(this);
+          SN.resume();
         });
-
-        // Add the second section "middlebox".
-        SN.add({
-          id: 'middlebox',
-          selector: '#middlebox .focusable',
-
-          // Focus the last focused element first then entering this section.
-          enterTo: 'last-focused'
+        return false;
+      }else if(SNInfo.direction == 'left' || SNInfo.direction == 'right'){
+        SN.pause();
+        $(this).ensureHorizontal(function() {
+          SN.focus(this);
+          SN.resume();
         });
+        return false;
+      }else {
+        SN.pause();
+        setTimeout(function(){
+          SN.focus(this);
+          SN.resume();
+        }.bind(this))
+        return false;
+      }
+    });
 
-        // Add the third section "settings-dialog".
-        //
-        // Any invisible elements can't be navigated at all so we can add this
-        // section at anytime and don't need to concern their current status.
-        SN.add({
-          id: 'settings-dialog',
-          selector: '#settings-dialog .focusable',
+    //-- 导航栏切换
+    $('#menu .focusable')
+    .on('sn:willfocus', function(e) { 
+      var SNInfo = e.originalEvent.detail;
+      if(SNInfo.direction == 'up' || SNInfo.direction == 'down'){
+        console.log()
+        $('.content')
+          .addClass('hide')
+          .filter('#' + this.id + 'page')
+          .removeClass('hide');
+      }
 
-          // Since it's a standalone dialog, we restrict its navigation to
-          // itself so the focus won't be moved to another section.
-          restrict: 'self-only',
+      SN.pause();
+        setTimeout(function(){
+          SN.focus(this);
+          SN.resume();
+        }.bind(this))
+      return false;
+    });
 
-          // Note that we don't set "enterTo" to "default-element" in this
-          // section because it's impossible to enter this section from the
-          // others by arrow keys. This default element will only affect the
-          // "focus('settings-dialog')" API call.
-          defaultElement: '#button-cancel'
-        });
+    //-- enter 事件
+    $('.focusable')
+      .on('sn:enter-down', function() {
+        $(this).addClass('active');
+      })
+      .on('sn:enter-up', function() {
+        var id = this.id;
+        var $this = $(this);
+        $this.removeClass('active');
+        sendSDK().bind(this)
+        pageCheck().bind(this);
 
-        // Expand the "button-function" area.
-        $('#button-function').on('sn:focused', function() {
-          $('#button-function-area .sub-button').removeClass('hide');
-        });
-
-        // Collapse the "button-function" area.
-        $('#button-function-area .button').on('sn:unfocused', function() {
-          // Use "setTimeout" to defer the action so that we can get the next
-          // focused element.
-          setTimeout(function() {
-            if (!$(':focus').is('#button-function-area .button')) {
-              $('#button-function-area .sub-button').addClass('hide');
-            }
-          });
-        });
-
-        // Implement "ensureVisible" feature.
-        $('#middlebox .focusable').on('sn:willfocus', function() {
-          SN.pause();
-          $(this).ensureVisible(function() {
-            SN.focus(this);
-            SN.resume();
-          });
-          return false;
-        });
-
-        $('.focusable')
-          .on('sn:enter-down', function() {
-            // Add "clicking" style.
-            $(this).addClass('active');
-          })
-          .on('sn:enter-up', function() {
-            var id = this.id;
-            var $this = $(this);
-
-            // Remove "clicking" style.
-            $this.removeClass('active');
-
-            // Do related actions according to the id of element.
-            if (id.substr(0, 9) == 'settings-') {
-              $this.find('i').toggleClass('fa-check');
-            } else {
-              switch(id) {
-                case 'button-settings':
-                  // Show the settings dialog
-                  $('#settings-container').removeClass('hide');
-
-                  // Move focus to section "settings-dialog"
-                  SN.focus('settings-dialog');
-                  break;
-                case 'button-save':
-                case 'button-cancel':
-                  // Hide the settings dialog
-                  $('#settings-container').addClass('hide');
-
-                  // Move focus back to section "upperbox".
-                  SN.focus('upperbox');
-                  break;
-              }
-            }
-
-            // For testing only.
-            console.log(id);
-          });
-
-        // Press ESC key to dismiss the settings dialog.
-        $(window).keydown(function(evt) {
-          if (evt.keyCode == 27 && !$('#settings-container').hasClass('hide')) {
-            $('#settings-container').addClass('hide');
-            SN.focus('upperbox');
-            return false;
-          }
-        });
-
-        // Set everything with "tabindex=-1".
-        SN.makeFocusable();
-
-        // Focus section "middlebox" by default.
-        SN.focus('middlebox');
       });
+    SN.makeFocusable();
+    SN.focus('menu');
+
+
+    function sendSDK(){
+      sdkApi.startApp($(this).attr("clickUrl"));
+    }
+
+    function pageCheck(){
+      console.log(this);
+      // $('#settings-container').removeClass('hide');
+      // // Move focus to section "settings-dialog"
+      // SN.focus('settings-dialog');
+    }
+  });
 })

@@ -5,6 +5,12 @@ input, button, textarea, select, optgroup, option { font-family: inherit; font-s
 input{background-color: transparent;}
 a{text-decoration:none;}
 a:hover{text-decoration: none;}
+:root{
+  --BODY-GAP:2rem;
+  --PAGE-GAP:2.5rem;
+  --ROW-GAP:1.5rem;
+  --COL-GAP:1.5rem;
+}
 /* 480p */
 @media screen and (max-width: 855px){
     html,body{font-size: 12px;}
@@ -21,239 +27,322 @@ a:hover{text-decoration: none;}
 @media screen and (min-width: 1922px){
     html,body{font-size: 54px;}
 }
-/* 让子元素不会遮挡父元素的点击事件 */
-.pointer-events {
-    pointer-events: none;
-}
-.page-hidden {
-    visibility: hidden;
-}
-.page-show {
-    visibility: initial !important;
+.point-event{
+  pointer-events: none;
 }
 .row-init {
-    display: -webkit-flex;
-    flex-flow: row;
-    justify-content: flex-start;
-    align-items: flex-start;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.row-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-flow: row nowrap;
 }
 .row-start{
-    display: -webkit-flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-flow: row nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
 }
 .row-center{
-    display: -webkit-flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: row nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row nowrap;
 }
 .row-between{
-    display: -webkit-flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-flow: row nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row nowrap;
 }
 .row-around{
-    display: -webkit-flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-flow: row nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: row nowrap;
 }
 .row-top{
-    display: -webkit-flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-flow: row nowrap;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-flow: row nowrap;
 }
 .column-top{
-    display: -webkit-flex;
-    align-items: center;
-    justify-content: start;
-    flex-flow: column nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-flow: column nowrap;
 }
 .column-start{
-    display: -webkit-flex;
-    align-items: start;
-    justify-content: center;
-    flex-flow: column nowrap;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-flow: column nowrap;
 }
 .column-around{
-    display: -webkit-flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-flow: column nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: column nowrap;
 }
 .column-center{
-    display: -webkit-flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: column nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
 }
 .column-between{
-    display: -webkit-flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-flow: column nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column nowrap;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-size: 24px;
-  }
-  
-  .hide {
-    display: none !important;
-  }
-  
-  .active {
-    position: relative;
-    left: 3px;
-    top: 3px;
-  }
-  
-  .container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .focusable {
-    outline: 0;
-    cursor: default;
-  }
-  
-  #main-container .button {
-    background-color: #ccc;
-    border-radius: 30px;
-    font-size: 40px;
-    width: 60px;
-    height: 60px;
-    display: inline-block;
-    vertical-align: top;
-  }
-  
-  #main-container .button span {
-    margin-top: 10px;
-    display: block;
-    text-align: center;
-  }
-  
-  #main-container .button:hover {
-    background-color: #999;
-  }
-  
-  #main-container .button:focus {
-    background-color: #333;
-    color: white;
-  }
-  
-  #button-function-area {
-    margin-left: 20px;
-    display: inline-block;
-    background-color: red;
-    background-color: #ccc;
-    border-radius: 30px;
-  }
-  
-  #upperbox {
-    padding: 40px;
-  }
-  
-  #middlebox {
-    position: relative;
-    background-color: #ccc;
-    height: 400px;
-    margin-top: 40px;
-    overflow: hidden;
-  }
-  
-  #lowerbox {
-    padding-left: 40px;
-  }
-  
-  .icon {
-    box-sizing: border-box;
-    background-color: orange;
-    width: 160px;
-    height: 160px;
-    display: inline-block;
-    border-radius: 50%;
-    margin: 20px;
-    vertical-align: top;
-    text-align: center;
-    font-size: 100px;
-    line-height: 160px;
-  }
-  
-  .icon:focus {
-    border: 5px solid white;
-    line-height: 150px;
-  }
-  
-  #settings-container {
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #settings-dialog {
-    box-sizing: border-box;
-    width: 640px;
-    height: 450px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 20px;
-  }
-  
-  #settings-dialog h1 {
-    margin: 0;
-    padding-bottom: 5px;
-    border-bottom: 1px solid black;
-  }
-  
-  #settings-dialog footer {
-    text-align: center;
-  }
-  
-  #settings-dialog .button {
-    box-sizing: border-box;
-    display: inline-block;
-    background-color: #ccc;
-    color: white;
-    padding: 7px 15px;
-    border-radius: 24px;
-    height: 48px;
-    margin: 0 15px;
-  }
-  
-  #settings-dialog .button:focus {
-    background-color: blue;
-  }
-  
-  #option-area {
-    margin: 1em;
-  }
-  
-  #option-area .focusable {
-    border: 2px solid white;
-    padding: 5px 10px;
-  }
-  
-  #option-area .focusable:focus {
-    border: 2px solid red;
-  }
-  
-  #option-area .fa {
-    width: 1.4em;
-    text-align: center;
-  }
-  
-  #option-area .fa-check {
-    color: blue;
-  }
+body{
+  background-color: #999;
+}
+
+/* 头部样式 */
+#header {
+  height: 10%;
+  padding-left: var(--BODY-GAP);
+  padding-right: var(--BODY-GAP);
+  padding-top: 1rem ;
+  padding-bottom: 1rem ;
+  box-sizing: border-box;
+}
+.logo {
+  width: 20%;
+}
+.setting-icon{
+  width: 80%;
+  height: 2rem;
+  border-radius: 50%;
+}
+.setting-icon .button{
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin-left:1.5rem;
+  display: inline-block;
+  text-align: center;
+  line-height: 2rem;
+}
+#header .fa{
+  width: 1em;
+  text-align: center;
+  box-sizing: border-box;
+}
+.contents {
+  height: 90%;
+}
+#menu {
+  width:10%;
+}
+#menu .button{
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom:1.5rem;
+  display: inline-block;
+  text-align: center;
+  line-height: 3rem;
+}
+.content {
+  width: 90%;
+}
+#menu #button-settings{
+  margin-top: 15%;
+}
+
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#homepage {
+  height: 100%;
+  position: relative;
+  padding: var(--ROW-GAP) 0;
+  box-sizing: border-box;
+  background-color: rgb(165, 165, 165);
+  overflow: hidden;
+}
+
+/* 首页首屏 */
+.home-first {
+  height: 80%;
+  width: 100%;
+  display: inline-grid;
+  box-sizing: border-box;
+  padding:0 var(--PAGE-GAP);
+  grid-row-gap: var(--ROW-GAP);
+  grid-column-gap:var(--COL-GAP);
+  grid-template-columns:  repeat(4, 1fr);
+  grid-template-rows: 2fr 1fr;
+}
+
+.live-tv {
+  grid-column: 1 / 3;
+  grid-row: 1 / 1;
+}
+.app-store {
+  grid-column: 1 / 3;
+  grid-row: 2 / 2;
+  display: inline-grid;
+  grid-row-gap: var(--ROW-GAP);
+  grid-column-gap:var(--COL-GAP);
+  grid-template-columns:  repeat(3, 1fr);
+}
+.app-name{
+  position: absolute;
+  left:0;
+  bottom: 10%;
+  width: 100%;
+  text-align: center;
+}
+.app-recommend {
+  grid-column: 3 / 5;
+  grid-row: 2 / 3;
+  display: inline-grid;
+  grid-row-gap: var(--ROW-GAP);
+  grid-column-gap:var(--COL-GAP);
+  grid-template-columns:  repeat(2, 1fr);
+  grid-template-rows: repeat(2,1fr);
+}
+.app-recommend-i{
+  height: 100%;
+  position: relative;
+}
+.app-recommend-i img{
+  width: 80%;
+  height: 90%;
+}
+
+/* 首页ads */
+.home-ads {
+  height: 20%;
+  box-sizing: border-box;
+  padding-left: var(--PAGE-GAP);
+  padding-right: var(--PAGE-GAP);
+  padding-top: var(--ROW-GAP) ;
+  padding-bottom: var(--ROW-GAP) ;
+}
+.home-ads-info {
+  height: 100%;
+}
+
+/* 首页video  */
+.content-model{
+  height: 80%;
+  width: 100%;
+  display: inline-grid;
+  box-sizing: border-box;
+  grid-row-gap: var(--ROW-GAP);
+  grid-column-gap:var(--COL-GAP);
+  grid-template-columns:  repeat(4, 1fr);
+  grid-template-rows: 3rem 1fr 1fr;
+}
+
+.content-title-gap{
+  padding:0 var(--PAGE-GAP);
+  width:100%;
+  grid-column: 1 / 5;
+  grid-row: 1 / 2;
+  display: inline-grid;
+  box-sizing: border-box;
+  grid-column-gap:var(--COL-GAP);
+  grid-template-columns:  repeat(2, 1fr);
+}
+.content-title {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.content-recommend {
+  padding:0 var(--PAGE-GAP);
+  grid-column: 1 / 5;
+  grid-row: 2 / 3;
+  display: inline-grid;
+  box-sizing: border-box;
+  /* padding:0 var(--PAGE-GAP); */
+  grid-row-gap: var(--ROW-GAP);
+  grid-column-gap:var(--COL-GAP);
+  grid-template-columns:  repeat(2, 1fr);
+}
+.content-list{
+  grid-column: 1 / 5;
+  grid-row: 3 / 4;
+  overflow:hidden;
+}
+.content-list-scroll {
+  width: max-content;
+  height: 100%;
+  display: inline-flex;
+  padding: 0 var(--PAGE-GAP); 
+}
+.content-item {
+  width: calc((90vw - 3*var(--COL-GAP) - 2*var(--PAGE-GAP))/4);
+  height: 100%;
+  margin-left: var(--COL-GAP);
+}
+.content-list-scroll .content-item:nth-child(1){
+  margin-left: 0 !important;
+}
+
+/* video page */
+#videopage {
+  height: 100%;
+  position: relative;
+  padding: var(--ROW-GAP) 0;
+  box-sizing: border-box;
+  background-color: rgb(165, 165, 165);
+  overflow: hidden;
+}
+
+/* music page */
+#musicpage {
+  height: 100%;
+  position: relative;
+  padding: var(--ROW-GAP) 0;
+  box-sizing: border-box;
+  background-color: rgb(165, 165, 165);
+  overflow: hidden;
+}
+/* video page */
+#gamepage {
+  height: 100%;
+  position: relative;
+  padding: var(--ROW-GAP) 0;
+  box-sizing: border-box;
+  background-color: rgb(165, 165, 165);
+  overflow: hidden;
+}
+
+/* 统一焦点样式 */
+.button {
+  background-color: #ccc;
+}
+.button:focus {
+  background-color: #333;
+  color: white;
+}
+.active {
+  position: relative;
+  left: 3px;
+  top: 3px;
+}
+.focusable {
+  outline: 0;
+  cursor: default;
+}
+.hide {
+  display: none !important;
+}

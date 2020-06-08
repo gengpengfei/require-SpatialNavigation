@@ -11,5 +11,4 @@ requirejs.config({
       "nls":"../nls"
     }
 });
-
 requirejs(["app/main","../plugin/animation"]);
